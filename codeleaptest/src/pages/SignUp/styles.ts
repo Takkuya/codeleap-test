@@ -26,21 +26,6 @@ export const SignUpContainer = styled.div`
       flex-direction: column;
       gap: 0.5rem;
       justify-content: center;
-
-      input {
-        border-radius: 5px;
-        border: 1px solid ${(props) => props.theme.colors.gray700};
-        padding: 0.2rem 1rem;
-
-        ::placeholder {
-          color: ${(props) => props.theme.colors.background};
-        }
-      }
-    }
-
-    .buttonWrapper {
-      display: flex;
-      justify-content: flex-end;
     }
   }
 `

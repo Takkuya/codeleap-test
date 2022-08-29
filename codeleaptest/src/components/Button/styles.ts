@@ -9,6 +9,7 @@ export const ButtonContainer = styled.div`
   button {
     font-weight: bold;
     padding: 0.5rem 2.5rem;
+    transition: 0.2s ease;
   }
 
   button:disabled {
@@ -18,11 +19,22 @@ export const ButtonContainer = styled.div`
 
   .${ButtonVariants.primary} {
     background-color: ${(props) => props.theme.colors.primary};
+    border: 1px solid ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.font};
+
+    &:hover {
+      background-color: transparent;
+      color: ${(props) => props.theme.colors.primary};
+    }
   }
   .${ButtonVariants.outlined} {
     background-color: transparent;
     border: 1px solid ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.primary};
+
+    &:hover {
+      background-color: ${(props) => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.font};
+    }
   }
 `

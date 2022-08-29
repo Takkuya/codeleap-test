@@ -27,10 +27,22 @@ const GlobalStyle = createGlobalStyle`
       cursor: pointer;
     }
 
-    input {
-      border: none;
-      outline: none;
+    input, textarea {
+      border-radius: 5px;
+      border: 1px solid ${(props) => props.theme.colors.gray700};
+      padding: 0.2rem 1rem;
+
+      ::placeholder {
+        color: ${(props) => props.theme.colors.background};
+      }
     }
+
+    .buttonWrapper {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.5rem;
+    }
+
 
     ${({ theme: { breakpoints } }) => css`
       @media (min-width: ${breakpoints.xs}) {
