@@ -2,11 +2,7 @@ import { MainContainer } from "./styles"
 
 import { useCallback, useEffect } from "react"
 import { useSelector } from "react-redux"
-import itemsSlice, {
-  getCardItems,
-  postCardItems,
-  useAppDispatch,
-} from "../../redux/itemsSlice"
+import { getCardItems, useAppDispatch } from "../../redux/itemsSlice"
 import store from "../../redux/store"
 import { Loading, Card, Form } from "../../components/"
 import { useNavigate } from "react-router-dom"

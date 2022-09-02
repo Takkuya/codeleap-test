@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { Button, Modal } from "../"
 import { deleteItems } from "../../actions/ItemsActions/delete"
 import { getCardItems, useAppDispatch } from "../../redux/itemsSlice"

@@ -1,9 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { AxiosResponse } from "axios"
+import { createSlice } from "@reduxjs/toolkit"
 import { useDispatch } from "react-redux"
 import { getItems } from "../actions/ItemsActions/get"
 import { postItems } from "../actions/ItemsActions/post"
-import { CardProps } from "../components"
 import store from "./store"
 
 const initialState = { value: [], loading: true }

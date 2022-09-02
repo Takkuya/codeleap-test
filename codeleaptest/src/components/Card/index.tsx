@@ -4,7 +4,7 @@ import { DeleteItemModal, EditItemModal, CalculatedTime } from "../"
 import store from "../../redux/store"
 import { CardContainer, EditIcon, TrashIcon } from "./styles"
 
-type CardProps = {
+export type CardProps = {
   id: number
   username: string
   created_datetime: Date
