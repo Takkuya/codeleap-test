@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Modal, Button } from "../"
+import { editItems } from "../../actions/ItemsActions/edit"
+import { getCardItems, useAppDispatch } from "../../redux/itemsSlice"
 import { FormContainer } from "../Form/styles"
 import { EditItemModalContainer } from "./styles"
 
@@ -18,13 +20,22 @@ export const EditItemModal = ({
   itemTitle,
   itemContent,
 }: EditItemModalProps) => {
-  const [cardInfo, setCardInfo] = useState({ cardTitle: "", cardContent: "" })
+  const dispatch = useAppDispatch()
+
+  const [editCardInfo, setEditCardInfo] = useState({
+    cardTitle: itemTitle,
+    cardContent: itemContent,
+  })
 
   async function handleEditItem() {
-    console.log(itemId, itemTitle, itemContent)
+    await editItems({
+      itemId,
+      itemTitle: editCardInfo.cardTitle,
+      itemContent: editCardInfo.cardContent,
+    })
+    await dispatch(getCardItems())
+    setIsEditModalVisible(false)
   }
-
-  // console.log(cardInfo)
 
   return (
     <EditItemModalContainer>
@@ -37,19 +48,25 @@ export const EditItemModal = ({
 
           <div id="formInputsWrapper">
             <label>Title</label>
-            {/* <input
+            <input
               placeholder="John Doe"
-              value={itemTitle}
+              value={editCardInfo.cardTitle}
               onChange={(event) =>
-                setCardInfo({ (event) => })
+                setEditCardInfo({
+                  ...editCardInfo,
+                  cardTitle: event.target.value,
+                })
               }
-            /> */}
+            />
             <label>Content</label>
             <textarea
               placeholder="John Doe"
-              value={itemContent}
+              value={editCardInfo.cardContent}
               onChange={(event) =>
-                setCardInfo({ ...cardInfo, cardContent: event.target.value })
+                setEditCardInfo({
+                  ...editCardInfo,
+                  cardContent: event.target.value,
+                })
               }
             />
           </div>
@@ -57,7 +74,8 @@ export const EditItemModal = ({
             <Button
               variant={["primary"]}
               disabled={
-                (!cardInfo.cardTitle.trim() || !cardInfo.cardContent.trim()) &&
+                (!editCardInfo.cardTitle.trim() ||
+                  !editCardInfo.cardContent.trim()) &&
                 true
               }
               onClick={() => handleEditItem()}

@@ -1,6 +1,6 @@
 import { api } from "../"
 
-type PostItemsProps = {
+export type PostItemsProps = {
   itemUsername: string
   itemTitle: string
   itemContent: string

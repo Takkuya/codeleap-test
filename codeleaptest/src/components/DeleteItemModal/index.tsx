@@ -1,6 +1,7 @@
+import { useEffect } from "react"
 import { Button, Modal } from "../"
 import { deleteItems } from "../../actions/ItemsActions/delete"
-import { removeCardItems, useAppDispatch } from "../../redux/itemsSlice"
+import { getCardItems, useAppDispatch } from "../../redux/itemsSlice"
 import { DeleteItemModalContainer } from "./styles"
 
 type DeleteItemModalProps = {
@@ -20,12 +21,9 @@ export const DeleteItemModal = ({
     setIsDeleteModalVisible(false)
   }
 
-  // async function handleDeleteItem() {
-  //   deleteItems({ itemId })
-  // }
-
-  function handleDeleteItem() {
-    dispatch(removeCardItems(itemId))
+  async function handleDeleteItem() {
+    await deleteItems({ itemId })
+    await dispatch(getCardItems())
   }
 
   return (

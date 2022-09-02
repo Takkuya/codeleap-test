@@ -1,8 +1,8 @@
 import { MainContainer } from "./styles"
 
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { useSelector } from "react-redux"
-import {
+import itemsSlice, {
   getCardItems,
   postCardItems,
   useAppDispatch,
@@ -22,6 +22,7 @@ export type ItemType = {
 export const Main = () => {
   const state = useSelector(store.getState)
   const userState = useSelector(store.getState)
+
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -32,11 +33,14 @@ export const Main = () => {
     }
   }
 
-  useEffect(() => {
+  const listPosts = useCallback(async () => {
     dispatch(getCardItems())
+  }, [dispatch])
+
+  useEffect(() => {
+    listPosts()
     handleRoutes()
-    console.log("rodando")
-  }, [dispatch, userState.user.value])
+  }, [dispatch])
 
   if (state.items.loading == true) {
     return <Loading />

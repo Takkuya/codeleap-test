@@ -18,6 +18,7 @@ export const Form = () => {
         itemContent: cardInfo.cardContent,
       })
     )
+    setCardInfo({ cardTitle: "", cardContent: "" })
   }
 
   return (
@@ -28,6 +29,7 @@ export const Form = () => {
         <label>Title</label>
         <input
           placeholder="Hello World"
+          value={cardInfo.cardTitle}
           onChange={(event) =>
             setCardInfo({ ...cardInfo, cardTitle: event.target.value })
           }
@@ -35,6 +37,7 @@ export const Form = () => {
         <label>Content</label>
         <textarea
           placeholder="Content Here"
+          value={cardInfo.cardContent}
           onChange={(event) =>
             setCardInfo({ ...cardInfo, cardContent: event.target.value })
           }

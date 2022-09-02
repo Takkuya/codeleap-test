@@ -21,8 +21,6 @@ export const Card = ({
 }: CardProps) => {
   const userState = useSelector(store.getState)
 
-  // console.log(props.item)
-
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
 
@@ -38,7 +36,6 @@ export const Card = ({
     <CardContainer>
       <div className="cardHeaderWrapper">
         <h2>{title}</h2>
-        <span>{id}</span>
         <div className="iconWrapper">
           {userState.user.value === username ? (
             <>

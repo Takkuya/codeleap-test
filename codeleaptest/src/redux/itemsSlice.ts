@@ -1,8 +1,9 @@
-import { Action, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { AxiosResponse } from "axios"
 import { useDispatch } from "react-redux"
-import { deleteItems } from "../actions/ItemsActions/delete"
 import { getItems } from "../actions/ItemsActions/get"
 import { postItems } from "../actions/ItemsActions/post"
+import { CardProps } from "../components"
 import store from "./store"
 
 const initialState = { value: [], loading: true }
@@ -21,8 +22,8 @@ export const itemsSlice = createSlice({
       state.value = action.payload
       state.loading = false
     },
-    post: (state, action: PayloadAction<string>) => {
-      state.value.push(action.payload)
+    post: (state, action: PayloadAction<never>) => {
+      state.value.concat(action.payload)
     },
   },
 })
@@ -42,7 +43,6 @@ export const postCardItems =
   async (dispatch: AppDispatch) => {
     try {
       const response = await postItems({ itemUsername, itemTitle, itemContent })
-      console.log(itemUsername, itemTitle, itemContent)
 
       dispatch(post(response.data))
       dispatch(getCardItems())
