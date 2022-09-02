@@ -2,11 +2,16 @@ import { MainContainer } from "./styles"
 
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
-import { getCardItems, useAppDispatch } from "../../redux/itemsSlice"
+import {
+  getCardItems,
+  postCardItems,
+  useAppDispatch,
+} from "../../redux/itemsSlice"
 import store from "../../redux/store"
 import { Loading, Card, Form } from "../../components/"
+import { useNavigate } from "react-router-dom"
 
-type itemType = {
+export type ItemType = {
   id: number
   username: string
   title: string
@@ -16,15 +21,22 @@ type itemType = {
 
 export const Main = () => {
   const state = useSelector(store.getState)
+  const userState = useSelector(store.getState)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const listItems = async () => {
-    dispatch(getCardItems())
+  //redirect to signupPage
+  function handleRoutes() {
+    if (userState.user.value === "") {
+      navigate("/signup")
+    }
   }
 
   useEffect(() => {
-    listItems()
-  }, [])
+    dispatch(getCardItems())
+    handleRoutes()
+    console.log("rodando")
+  }, [dispatch, userState.user.value])
 
   if (state.items.loading == true) {
     return <Loading />
@@ -36,11 +48,12 @@ export const Main = () => {
         <h2>Codeleap Network</h2>
       </div>
       <div id="formWrapper">
-        <Form title={"What's on your mind?"} />
+        <Form />
       </div>
 
-      {state.items.value.map((item: itemType) => (
+      {state.items.value.map((item: ItemType) => (
         <Card
+          key={item.id}
           id={item.id}
           username={item.username}
           title={item.title}

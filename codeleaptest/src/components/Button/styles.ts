@@ -22,7 +22,7 @@ export const ButtonContainer = styled.div`
     border: 1px solid ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.font};
 
-    &:hover {
+    &:hover:enabled {
       background-color: transparent;
       color: ${(props) => props.theme.colors.primary};
     }
@@ -32,7 +32,7 @@ export const ButtonContainer = styled.div`
     border: 1px solid ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.primary};
 
-    &:hover {
+    &:hover:enabled {
       background-color: ${(props) => props.theme.colors.primary};
       color: ${(props) => props.theme.colors.font};
     }

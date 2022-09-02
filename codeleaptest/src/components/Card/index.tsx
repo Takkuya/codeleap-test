@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import { DeleteItemModal, EditItemModal } from "../"
+import { DeleteItemModal, EditItemModal, CalculatedTime } from "../"
 import store from "../../redux/store"
 import { CardContainer, EditIcon, TrashIcon } from "./styles"
 
@@ -19,7 +19,9 @@ export const Card = ({
   title,
   content,
 }: CardProps) => {
-  const state = useSelector(store.getState)
+  const userState = useSelector(store.getState)
+
+  // console.log(props.item)
 
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
@@ -36,19 +38,24 @@ export const Card = ({
     <CardContainer>
       <div className="cardHeaderWrapper">
         <h2>{title}</h2>
+        <span>{id}</span>
         <div className="iconWrapper">
-          <button onClick={handleDeleteModal}>
-            <TrashIcon />
-          </button>
-          <button onClick={handeEditModal}>
-            <EditIcon />
-          </button>
+          {userState.user.value === username ? (
+            <>
+              <button onClick={handleDeleteModal}>
+                <TrashIcon />
+              </button>
+              <button onClick={handeEditModal}>
+                <EditIcon />
+              </button>
+            </>
+          ) : null}
         </div>
       </div>
       <div className="cardContentWrapper">
         <div className="cardInfoWrapper">
           <span className="user">@{username}</span>
-          <span>25 Minutos ago</span>
+          <CalculatedTime time={created_datetime} />
         </div>
         <div className="cardTextWrapper">
           <p>{content}</p>
@@ -58,11 +65,15 @@ export const Card = ({
       <DeleteItemModal
         isDeleteModalVisible={isDeleteModalVisible}
         setIsDeleteModalVisible={setIsDeleteModalVisible}
+        itemId={id}
       />
 
       <EditItemModal
         isEditModalVisible={isEditModalVisible}
         setIsEditModalVisible={setIsEditModalVisible}
+        itemId={id}
+        itemTitle={title}
+        itemContent={content}
       />
     </CardContainer>
   )

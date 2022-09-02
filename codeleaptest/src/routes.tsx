@@ -14,7 +14,7 @@ export const MainRoutes = () => {
       <BrowserRouter>
         <Routes>
           <Route path="signup" element={<SignUp />} />
-          <Route path="main" element={<Main />} />
+          <Route path="" element={<Main />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

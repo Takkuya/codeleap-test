@@ -1,23 +1,55 @@
+import { useState } from "react"
+import { useSelector } from "react-redux"
 import { Button } from "../"
 import { FormContainer } from "./styles"
+import store from "../../redux/store"
+import { postCardItems, useAppDispatch } from "../../redux/itemsSlice"
 
-type FormProps = {
-  title: string
-}
+export const Form = () => {
+  const [cardInfo, setCardInfo] = useState({ cardTitle: "", cardContent: "" })
+  const dispatch = useAppDispatch()
+  const userState = useSelector(store.getState)
 
-export const Form = ({ title }: FormProps) => {
+  function handleNewItem() {
+    dispatch(
+      postCardItems({
+        itemUsername: userState.user.value,
+        itemTitle: cardInfo.cardTitle,
+        itemContent: cardInfo.cardContent,
+      })
+    )
+  }
+
   return (
     <FormContainer>
-      <h2>{title}</h2>
+      <h2>What's on your mind?</h2>
 
       <div id="formInputsWrapper">
         <label>Title</label>
-        <input placeholder="John Doe" />
+        <input
+          placeholder="Hello World"
+          onChange={(event) =>
+            setCardInfo({ ...cardInfo, cardTitle: event.target.value })
+          }
+        />
         <label>Content</label>
-        <textarea placeholder="John Doe" />
+        <textarea
+          placeholder="Content Here"
+          onChange={(event) =>
+            setCardInfo({ ...cardInfo, cardContent: event.target.value })
+          }
+        />
       </div>
       <div className="buttonWrapper">
-        <Button variant={["primary"]}>Create</Button>
+        <Button
+          variant={["primary"]}
+          disabled={
+            (!cardInfo.cardTitle.trim() || !cardInfo.cardContent.trim()) && true
+          }
+          onClick={() => handleNewItem()}
+        >
+          Create
+        </Button>
       </div>
     </FormContainer>
   )

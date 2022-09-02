@@ -18,7 +18,12 @@ export const Modal = ({
         visible={isModalVisible}
         onClick={() => setIsModalVisible(!isModalVisible)}
       >
-        <div id="modalContentWrapper">{children}</div>
+        <div
+          id="modalContentWrapper"
+          onClick={(event) => event.stopPropagation()}
+        >
+          {children}
+        </div>
       </ModalContainer>
     </>
   )
