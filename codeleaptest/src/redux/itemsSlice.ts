@@ -22,7 +22,7 @@ export const itemsSlice = createSlice({
       state.value = action.payload
       state.loading = false
     },
-    post: (state, action: PayloadAction<never>) => {
+    post: (state, action) => {
       state.value.concat(action.payload)
     },
   },
